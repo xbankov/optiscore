@@ -1,3 +1,4 @@
-!/secrets/.placeholder
-
+/secrets/*
 .idea
+
+!/secrets/.placeholder
