@@ -5,3 +5,11 @@ matplotlib
 requests
 jupyter
 opencv-python
+pyiqa
+scikit-image
+torch
+torchvision
+tqdm
+image-similarity-measures
+pyfftw
+
