@@ -31,7 +31,7 @@ def noise_score(image: Image.Image):
 
 def similarity(measure_fn, image: Image.Image, target: Image.Image):
     image = img_as_ubyte(image)
-    target = img_as_ubyte(target) 
+    target = img_as_ubyte(target)
     return measure_fn(org_img=image, pred_img=target)
 
 

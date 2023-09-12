@@ -76,10 +76,12 @@ def main():
 
         # Process the media items in the response
         for media_item in response.get("mediaItems", []):
+            if media_item_id in df["id"].values or not media_item[
+                "mimeType"
+            ].startswith("photo"):
+                continue
             media_item_id = media_item["id"]
             # Skip media items if the ID is already in the DataFrame
-            if media_item_id in df["id"].values:
-                continue
 
             baseUrl = media_item["baseUrl"] + "=d"
 
@@ -128,7 +130,7 @@ def main():
             #     metrics[model] = pyiqa_single_image_score(downsampled, model, device)
 
             # Append the metrics as a new row to the DataFrame
-            df = df.append(metrics, ignore_index=True)
+            # df = df.append(metrics, ignore_index=True)
 
             previous_image = image
             previous_image_id = media_item_id
@@ -136,12 +138,13 @@ def main():
             pbar.update()
 
         # Save the DataFrame to a CSV file after each iteration
-        df.to_csv("image_metrics.csv", index=False)
+        # df.to_csv("image_metrics.csv", index=False)
+
         # Check if there are more pages
         page_token = response.get("nextPageToken")
 
     # Save the final DataFrame to a CSV file if needed
-    df.to_csv("image_metrics.csv", index=False)
+    # df.to_csv("image_metrics.csv", index=False)
 
     # For finding a duplicates in a numpy array of images
     # https://github.com/idealo/imagededup/blob/4e0b15f4cd82bcfa321eb280b843e57ebc5ff154/imagededup/methods/hashing.py#L135
